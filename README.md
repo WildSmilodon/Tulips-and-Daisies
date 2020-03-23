@@ -1,1 +1,1 @@
-Tulips and Daisies, a CodinGame mulltiplayer game
+Tulips and Daisies, a CodinGame multiplayer game.

@@ -1,0 +1,29 @@
+read fieldWidth:int fieldHeight:int
+read costSoil:int costGrass:int costRocks:int costFlower:int 
+read yourFlowers:word(10) opponentsFlowers:word(10)
+
+gameloop
+read turnsLeft:int
+read yourGold:int opponentGold:int
+loop fieldHeight read gridLine:word(16)
+write 0 0
+
+STATEMENT
+Have more gold than your opponent!
+
+INPUT
+fieldWidth: The width of the playing field
+fieldHeight: The height of the playing field
+costSoil: Cost to plant your flower on a soil tile
+costGrass: Cost to plant your flower on a grass tile
+costRocks: Cost to plant your flower on a rocks tile 
+costFlower: Cost to plant your flower on a tile with opponents flower
+yourFlowers: type of flowers you plant (tulips or daisies)
+opponentsFlowers: type of flowers opponent plants (tulips or daisies) 
+yourGold: Your current gold
+opponentGold: Opponents current gold
+gridLine: playing field encoded by S - soil, G - grass, R - rocks, T - tulip, D - daisy.
+turnsLeft: The number of turns left in the game
+
+OUTPUT
+row column
