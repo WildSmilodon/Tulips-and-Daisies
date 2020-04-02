@@ -214,15 +214,15 @@ public class Referee extends AbstractReferee {
     
     private void drawPlayerHUD(Player player) {
 
-    	int m = min(player.getNicknameToken().length(),15);
-        String playerNick = player.getNicknameToken().substring(0,m);
+
     	
-        graphicEntityModule.createText(playerNick)
+        graphicEntityModule.createText(player.getNicknameToken())
         	    .setX(250+(1920-500)*player.getIndex())
         	    .setY(175)
         	    .setZIndex(20)
         	    .setFontSize(50)
         	    .setFillColor(0xffffff)
+        	    .setMaxWidth(375)
         	    .setAnchor(0.5);
         
         graphicEntityModule.createSprite()
