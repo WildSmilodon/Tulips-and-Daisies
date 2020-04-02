@@ -10,6 +10,7 @@ import com.codingame.gameengine.module.entities.Group;
 import com.codingame.gameengine.module.entities.Line;
 import com.codingame.gameengine.module.entities.Sprite;
 import com.codingame.gameengine.module.entities.Text;
+import com.codingame.gameengine.module.tooltip.TooltipModule;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -25,6 +26,7 @@ public class Grid {
     
     private String[] images = { "grass.png", "soil.png", "rocks.png", "daisy.png", "tulip.png", "ograja_zgoraj_desno.png", "ograja_vodoravno.png", "ograja_zgoraj_levo.png", "ograja_navpicno.png", "ograja_spodaj_levo.png", "ograja_spodaj_desno.png", "coin.png", "empty.png"};
     private String[] letters = { "G", "S", "R", "D", "T" };
+    private String[] descriptions = { "grass", "soil", "rocks", "daisy", "tulip" };
     private int fieldWidth;
     private int fieldHeight;
     
@@ -64,6 +66,7 @@ public class Grid {
      	 for (int r = 0; r < fieldHeight; r++) {
      		 for (int c = 0; c < fieldWidth; c++) {
      			sprites[r][c] = createSprite(r,c,grid[r][c], 1.0);
+     			//tooltipModule.setTooltipText(sprites[r][c], "r = " + r + "\nc = " + c);
      			drawSprite(sprites[r][c]);		
      		 }
      	 }    	 
@@ -79,6 +82,16 @@ public class Grid {
     		return soil;
     	} else {
     		return rocks;
+    	}
+    }
+
+    
+    public void setTooltips(TooltipModule tooltipModule) {
+    
+    	for (int r = 0; r < fieldHeight; r++) {
+    		for (int c = 0; c < fieldWidth; c++) {
+    			tooltipModule.setTooltipText(sprites[r][c], descriptions[grid[r][c]]+"\nrow = " + r + "\ncol = " + c);
+    		}
     	}
     }
 

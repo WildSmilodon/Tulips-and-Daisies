@@ -56,6 +56,7 @@ public class Referee extends AbstractReferee {
     	gameManager.setMaxTurns(maxTurns);
     	grid = GridProvider.get();
     	grid.init(fieldWidth, fieldHeight, costSoil, costGrass, costRocks, costFlower, rockPercent, random);
+    	grid.setTooltips(tooltipModule);
     	
     	// Init players
      	textGold = new Text[2];
@@ -86,6 +87,10 @@ public class Referee extends AbstractReferee {
 
     @Override
     public void gameTurn(int turn) {
+    	
+    	
+    	// set tool tips on playing field
+    	grid.setTooltips(tooltipModule);
     	
     	// Take note of the remaining number of turns
     	turnsLeft = (int) ( gameManager.getMaxTurns() - turn ) / 2 + 1; 
@@ -127,7 +132,7 @@ public class Referee extends AbstractReferee {
                 	// Update players gold            		
             		player.gold = player.gold + goldEarned;
                     drawPlayerGold(textGold[player.getIndex()],player);
-                    gameManager.addTooltip(gameManager.getPlayer(player.getIndex()), player.getNicknameToken()+" "+goldEarned+" gold.");
+                   //gameManager.addTooltip(gameManager.getPlayer(player.getIndex()), player.getNicknameToken()+" "+goldEarned+" gold.");
             	} else {
                 	// Draw the move
                 	grid.drawPlay(action);
