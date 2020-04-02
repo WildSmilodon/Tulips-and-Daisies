@@ -89,7 +89,7 @@ public class Agent1 {
                 }
             }
             
-            System.out.println(row + " " + col); // + " (" + row + "," + col + ")");
+            System.out.println(row + " " + col); // + " (" + row +","+ col + ")");
         }
     }
     

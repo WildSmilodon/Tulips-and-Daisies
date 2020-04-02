@@ -66,7 +66,6 @@ public class Grid {
      	 for (int r = 0; r < fieldHeight; r++) {
      		 for (int c = 0; c < fieldWidth; c++) {
      			sprites[r][c] = createSprite(r,c,grid[r][c], 1.0);
-     			//tooltipModule.setTooltipText(sprites[r][c], "r = " + r + "\nc = " + c);
      			drawSprite(sprites[r][c]);		
      		 }
      	 }    	 

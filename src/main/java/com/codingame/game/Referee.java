@@ -214,7 +214,10 @@ public class Referee extends AbstractReferee {
     
     private void drawPlayerHUD(Player player) {
 
-        graphicEntityModule.createText(player.getNicknameToken())
+    	int m = min(player.getNicknameToken().length(),15);
+        String playerNick = player.getNicknameToken().substring(0,m);
+    	
+        graphicEntityModule.createText(playerNick)
         	    .setX(250+(1920-500)*player.getIndex())
         	    .setY(175)
         	    .setZIndex(20)
@@ -254,7 +257,8 @@ public class Referee extends AbstractReferee {
     }    
     
     private void drawPlayerComment(Text text, String s) {
-        text.setText(s);
+    	int m = min(s.length(),25);
+        text.setText(s.substring(0,m));
     }    
     
     private int rndInt(int min, int max) {
@@ -301,6 +305,10 @@ public class Referee extends AbstractReferee {
     	} else {
     		return 0;
     	}
+    }
+    
+    private int min(int a, int b) {
+    	if (a>b) { return b; } else { return a; }
     }
 
     
