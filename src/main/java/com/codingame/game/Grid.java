@@ -53,7 +53,7 @@ public class Grid {
         grid = new int[fieldHeight][fieldWidth];
         sprites = new Sprite[fieldHeight][fieldWidth];
 
-        // Draw initial field
+        // Generate initial tile distribution
     	 for (int r = 0; r < fieldHeight; r++) {
     		 for (int c = 0; c < fieldWidth; c++) {
     			grid[r][c] = getInitialTile(random, rockPercent);
@@ -110,6 +110,24 @@ public class Grid {
     	}
     	return ok;
     }
+
+    public String getReason(Action action, int gold) {
+    	String reason = "";
+    	Boolean ok = action.row >= 0 & action.row < fieldHeight & action.col >=0 & action.col <  fieldWidth;
+    	if (!ok) {
+    		if (action.row == -999 && action.col == -999) {
+    			reason = "invalid action!";
+    		} else {
+    			reason = "invalid location!";
+    		}
+    	}
+    	
+    	if (ok) {
+    		int cost = getCost(action);
+    		if (gold - cost < 0) { ok = false;  reason = "out of gold!"; }
+    	}
+    	return reason;
+    }    
     
     public void plantFlower(Action action) {   	
     	int flower = action.player.getIndex()+3;
@@ -286,7 +304,12 @@ public class Grid {
 
 	    	// Draw flower
 			sprites[action.row][action.col].setImage(images[grid[action.row][action.col]]);
-			graphicEntityModule.commitEntityState(0.0, sprites[action.row][action.col]);
+//			graphicEntityModule.commitEntityState(0.0, sprites[action.row][action.col]);
+
+			sprites[action.row][action.col].setScale(0);
+	        graphicEntityModule.commitEntityState(0.15, sprites[action.row][action.col]);
+	        sprites[action.row][action.col].setScale(1, Curve.ELASTIC);
+	        graphicEntityModule.commitEntityState(0.3, sprites[action.row][action.col]);      
 			
     		
     		allRows.add(action.row);
@@ -297,18 +320,18 @@ public class Grid {
     			int r = allRows.get(i);
     			int c = allCols.get(i);
    	    	
-    			graphicEntityModule.commitEntityState(0.2, sprites[r][c]);    			
+    			graphicEntityModule.commitEntityState(0.3, sprites[r][c]);    			
     	    	// Draw coins    			
     	    	sprites[r][c].setImage(images[11]);    	    	
     	    	sprites[r][c].setScale(0);
-    	    	graphicEntityModule.commitEntityState(0.3, sprites[r][c]);
+    	    	graphicEntityModule.commitEntityState(0.4, sprites[r][c]);
     	    	sprites[r][c].setScale(1, Curve.ELASTIC);
-    	        graphicEntityModule.commitEntityState(0.4, sprites[r][c]);
+    	        graphicEntityModule.commitEntityState(0.5, sprites[r][c]);
     	    	
     	        // Animate coins
     	        int x = sprites[r][c].getX();
     	        int y = sprites[r][c].getY();
-    	        sprites[r][c].setX(300 + (1920 - 600) * action.player.getIndex() );
+    	        sprites[r][c].setX(350 + (1920 - 700) * action.player.getIndex() );
     	        sprites[r][c].setY(500);
     	        graphicEntityModule.commitEntityState(0.7, sprites[r][c]);
     	        sprites[r][c].setImage(images[12]); // empty
@@ -333,9 +356,7 @@ public class Grid {
 
     		}
 
-    	}
-   	
-    	
+    	}   	    
     	return goldEarned;
     }
       
@@ -350,8 +371,7 @@ public class Grid {
                 .setBaseHeight((int) (scale * cellSize))            
                 .setAnchor(0.5); 
         
-        return avatar;
-    	
+        return avatar;    	
     }        
 
     public void drawFence()  {
@@ -390,9 +410,7 @@ public class Grid {
     	sprite.setScale(0);
         graphicEntityModule.commitEntityState(0.2, sprite);
         sprite.setScale(1, Curve.ELASTIC);
-        graphicEntityModule.commitEntityState(1.0, sprite);
-       
-    	
+        graphicEntityModule.commitEntityState(1.0, sprite);          	
     }
 
     
@@ -404,8 +422,7 @@ public class Grid {
                 .setZIndex(20)
                 .setFontSize(40)
                 .setFillColor(0xffffff)
-                .setAnchor(0.5);
-    	
+                .setAnchor(0.5);    	
     }
     
     private int convert(int orig, int cellSize, double unit) {

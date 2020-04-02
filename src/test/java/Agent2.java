@@ -26,17 +26,15 @@ public class Agent2 {
             input = scanner.nextLine();
             System.err.println(input); 
                         
-            for (int r = 0; r < fieldHeight; r++) {
-            
-            	input = scanner.nextLine();
-                //System.err.println(input);
-            
+            for (int r = 0; r < fieldHeight; r++) {            
+            	input = scanner.nextLine();           
             }
             
             int row = randomWithRange(0,fieldHeight-1);
             int col = randomWithRange(0,fieldWidth-1);
             
-            System.out.println(row + " " + col + " (" + row +","+ col + ")");
+            System.out.println(row + " " + col); // + " (" + row +","+ col + ")");
+           
         }
     }
     

@@ -34,12 +34,9 @@ public class Player extends AbstractMultiplayerPlayer {
                return new Action(this, row, col, comment);       	        
             }
             catch (NumberFormatException ex)
-            {
-                deactivate("Invalid input!");
-                setScore(-1);
-            	gameManager.endGame();    	        	
+            {	        	
             }    	        	
-            return new Action(this, 0,0,"");   
+            return new Action(this, -999,-999,"");   
     }    
     
     public void init(int g) {
