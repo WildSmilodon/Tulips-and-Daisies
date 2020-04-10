@@ -24,9 +24,9 @@ public class Grid {
     private int rocks = 2;
 	private int[] costs = new int[5];
     
-    private String[] images = { "grass.png", "soil.png", "rocks.png", "daisy.png", "tulip.png", "ograja_zgoraj_desno.png", "ograja_vodoravno.png", "ograja_zgoraj_levo.png", "ograja_navpicno.png", "ograja_spodaj_levo.png", "ograja_spodaj_desno.png", "coin.png", "empty.png"};
-    private String[] letters = { "G", "S", "R", "D", "T" };
-    private String[] descriptions = { "grass", "soil", "rocks", "daisy", "tulip" };
+    private String[] images = { "grass.png", "soil.png", "rocks.png", "tulip.png", "daisy.png", "ograja_zgoraj_desno.png", "ograja_vodoravno.png", "ograja_zgoraj_levo.png", "ograja_navpicno.png", "ograja_spodaj_levo.png", "ograja_spodaj_desno.png", "coin.png", "empty.png"};
+    private String[] letters = { "G", "S", "R", "T", "D" };
+    private String[] descriptions = { "grass", "soil", "rocks", "tulip", "daisy" };
     private int fieldWidth;
     private int fieldHeight;
     

@@ -27,7 +27,7 @@ public class Referee extends AbstractReferee {
     private Text[] textGold;
     private Text[] textEarnedGold;
     private Text[] textComment;  
-    private String[] flowerName = { "daisies", "tulips"}; 
+    private String[] flowerName = { "tulips", "daisies"}; 
     
     @Override
     public void init() {
@@ -200,7 +200,7 @@ public class Referee extends AbstractReferee {
         	.setAnchor(0.5);
 
         graphicEntityModule.createSprite()
-    		.setImage("tulip.png")
+    		.setImage("daisy.png")
     		.setX(1920 - 250)
     		.setY(750)
     		.setBaseWidth(188)
@@ -208,7 +208,7 @@ public class Referee extends AbstractReferee {
     		.setAnchor(0.5);
         
         graphicEntityModule.createSprite()
-    		.setImage("daisy.png")
+    		.setImage("tulip.png")
     		.setX(250)
     		.setY(750)
     		.setBaseWidth(188)
