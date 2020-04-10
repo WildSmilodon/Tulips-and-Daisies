@@ -25,6 +25,7 @@ public class Referee extends AbstractReferee {
     private Grid grid;
     private int turnsLeft;
     private Text[] textGold;
+    private Text[] textEarnedGold;
     private Text[] textComment;  
     private String[] flowerName = { "daisies", "tulips"}; 
     
@@ -60,6 +61,7 @@ public class Referee extends AbstractReferee {
     	
     	// Init players
      	textGold = new Text[2];
+     	textEarnedGold = new Text[2];
      	textComment = new Text[2];
     	for (Player player : gameManager.getActivePlayers()) {
             player.init(startGold);  
@@ -117,7 +119,8 @@ public class Referee extends AbstractReferee {
             if (grid.isValid(action,player.gold)) {
             	
             	// Update players gold
-            	player.gold = player.gold - grid.getCost(action);
+            	int cost = grid.getCost(action);
+            	player.gold = player.gold - cost;
                 drawPlayerGold(textGold[player.getIndex()],player);
                 
                 // Draw players comment on the screen
@@ -128,20 +131,22 @@ public class Referee extends AbstractReferee {
             	           		
             	// Harvest flowers
             	int goldEarned = grid.harvest(action);
+            	drawNumber(textEarnedGold[player.getIndex()],goldEarned-cost);
+            	drawNumber(textEarnedGold[opponent.getIndex()],0); // delete opponents
+            	
             	if (goldEarned > 0) {
                 	// Update players gold            		
             		player.gold = player.gold + goldEarned;
                     drawPlayerGold(textGold[player.getIndex()],player);
-                   //gameManager.addTooltip(gameManager.getPlayer(player.getIndex()), player.getNicknameToken()+" "+goldEarned+" gold.");
+                   //gameManager.addTooltip(gameManager.getPlayer(player.getIndex()), player.getNicknameToken()+" "+goldEarned+" gold.");                    
             	} else {
                 	// Draw the move
                 	grid.drawPlay(action);
             	}
-            	
+            	           	            	
             	// Set player score
             	player.setScore(player.gold);    
             	
-
             	// Are we done?
             	if (turnsLeft == 1 & player.getIndex() == 1 ) { endGame(); } 
             	            	
@@ -241,6 +246,15 @@ public class Referee extends AbstractReferee {
         	    .setFontSize(60)
         	    .setFillColor(0xffffff)
         	    .setAnchor(0.5);
+
+        textEarnedGold[player.getIndex()] = graphicEntityModule.createText("")
+        	    .setX(360+(1920-720)*player.getIndex())
+        	    .setY(375)
+        	    .setZIndex(20)
+        	    .setFontSize(40)
+        	    .setFillColor(0xffffff)
+        	    .setAnchor(0.5);        
+        
         
         textComment[player.getIndex()] = graphicEntityModule.createText("I love " + flowerName[player.getIndex()] + ".")
         	    .setX(250+(1920-500)*player.getIndex())
@@ -255,6 +269,13 @@ public class Referee extends AbstractReferee {
     private void drawPlayerGold(Text text, Player player) {
         text.setText(new Integer(player.gold).toString());
     }    
+
+    private void drawNumber(Text text,int n) {
+    	String s = new Integer(n).toString();
+    	if (n> 0) { text.setText("+"+s); text.setFillColor(0xffffff); } 
+  		if (n< 0) { text.setText(s); text.setFillColor(0xff0000); }
+   		if (n==0) {	text.setText(""); }
+    }        
     
     private void drawPlayerComment(Text text, String s) {
     	int m = min(s.length(),25);
